@@ -1,0 +1,8 @@
+Hi {@RECEIVERNAME},
+
+I came across this post at {@SITENAME} and thought you might be interested. Have a look.
+
+{@ADURL}
+
+{@SENDERNAME}
+{@SENDEREMAIL}

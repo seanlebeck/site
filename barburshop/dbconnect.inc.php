@@ -1,0 +1,1 @@
+<?php $db_host = "localhost";$db_user = "dojoep_barbur";$db_pass = "s3rv3r123";$db_name = "dojoep_barburshop";?>

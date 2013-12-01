@@ -1,0 +1,62 @@
+/*----- Pager Styles ----- */
+
+
+table.pagetable {
+	border: 1px solid #EAEAEA;
+	background-color: white;
+}
+
+table.pagetable td {
+	background-color: #F5F5F5;
+}
+
+table.pagetable a {
+	display: block;
+}
+
+table.pagetable td.pagetable_activecell {
+	background-color: white;
+	color: #CC3300;
+	font-weight: bold;
+	border-left: 1px solid #EAEAEA;
+	border-right: 1px solid #EAEAEA;
+	padding: 0px 3px;
+	/*background-color: #EDF2F6;
+	border: 1px solid #A4B0C0;*/
+}
+
+table.pagetable td.pagetable_ellipses {
+	border-left: 1px solid silver;
+	color: silver;
+	padding: 0px 5px;
+}
+
+a.pagelink {
+	display: block;
+	text-decoration: none;
+	padding: 0px 0px;
+}
+
+a.pagelink_first {
+	display: block;
+	text-decoration: none;
+	padding: 0px 3px;
+}
+
+a.pagelink_prev {
+	display: block;
+	text-decoration: none;
+	padding: 0px 3px;
+}
+
+a.pagelink_next {
+	display: block;
+	text-decoration: none;
+	padding: 0px 3px;
+}
+
+a.pagelink_last {
+	display: block;
+	text-decoration: none;
+	padding: 0px 3px;
+}

@@ -1,0 +1,186 @@
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/posts/([0-9]+)([-_][^/]*)?/([0-9]+)([-_][^/]*)?/([0-9]+)([-_][^/]*)?\.html
+if matched then
+	set URL=/index.php?view=showad&adid=$7&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/posts/([0-9]+)([-_][^/]*)?/([0-9]+)([-_][^/]*)?/page([0-9]*)\.html
+if matched then
+	set URL=/index.php?view=ads&catid=$3&subcatid=$5&cityid=$1&page=$7
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/posts/([0-9]+)([-_][^/]*)?/([0-9]+)([-_][^/]*)?
+if matched then
+	set URL=/index.php?view=ads&catid=$3&subcatid=$5&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/posts/([0-9]+)([-_][^/]*)?/page([0-9]*)\.html
+if matched then
+	set URL=/index.php?view=ads&catid=$3&subcatid=0&&cityid=$1&page=$5
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/posts/([0-9]+)([-_][^/]*)?
+if matched then
+	set URL=/index.php?view=ads&catid=$3&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/events(/(([0-9]+)-([0-9]+)-([0-9]+)))?/([0-9]+)([-_][^/]*)?\.html
+if matched then
+	set URL=/index.php?view=showevent&date=$4&adid=$8&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/events/(([0-9]+)-([0-9]+)-([0-9]+))/page([0-9]*)\.html
+if matched then
+	set URL=/index.php?view=events&date=$3&cityid=$1&page=$7
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/events/(([0-9]+)-([0-9]+)-([0-9]+))
+if matched then
+	set URL=/index.php?view=events&date=$3&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/events
+if matched then
+	set URL=/index.php?view=events&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/images/([^/]+)/([0-9]+)([-_][^/]*)?\.html
+if matched then
+	set URL=/index.php?view=showimg&posterenc=$3&imgid=$4&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/images/([^/]+)/page([0-9]+)\.html
+if matched then
+	set URL=/index.php?view=imgs&posterenc=$3&cityid=$1&page=$4
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/images/page([0-9]+)\.html
+if matched then
+	set URL=/index.php?view=imgs&cityid=$1&page=$3
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/images/([^/]+)
+if matched then
+	set URL=/index.php?view=imgs&posterenc=$3&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/images
+if matched then
+	set URL=/index.php?view=imgs&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/showpost/([0-9]+)([-_][^/]*)?\.html
+if matched then
+	set URL=/index.php?view=showad&adid=$3&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/showevent/([0-9]+)([-_][^/]*)?\.html
+if matched then
+	set URL=/index.php?view=showevent&adid=$3&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?/showimage/([0-9]+)([-_][^/]*)?\.html
+if matched then
+	set URL=/index.php?view=showimg&imgid=$3&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?
+if matched then
+	set URL=/index.php?view=main&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/([-]?[0-9]+)([-_][^/]*)?
+if matched then
+	set URL=/index.php?view=main&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/feed/posts
+if matched then
+	set URL=/rss.php?view=ads&cityid=0
+	goto END
+endif
+
+match URL into $ with ^/feed/events
+if matched then
+	set URL=/rss.php?view=events&cityid=0
+	goto END
+endif
+
+match URL into $ with ^/feed/([-]?[0-9]+)([-_][^/]*)?/posts/([0-9]+)([-_][^/]*)?/([0-9]+)([-_][^/]*)?
+if matched then
+	set URL=/rss.php?view=ads&catid=$3&subcatid=$5&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/feed/([-]?[0-9]+)([-_][^/]*)?/posts/([0-9]+)([-_][^/]*)?
+if matched then
+	set URL=/rss.php?view=ads&catid=$3&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/feed/([-]?[0-9]+)([-_][^/]*)?/posts
+if matched then
+	set URL=/rss.php?view=ads&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/feed/([-]?[0-9]+)([-_][^/]*)?/events/(([0-9]+)-([0-9]+)-([0-9]+))
+if matched then
+	set URL=/rss.php?view=events&date=$3&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/feed/([-]?[0-9]+)([-_][^/]*)?/events
+if matched then
+	set URL=/rss.php?view=events&cityid=$1
+	goto END
+endif
+
+match URL into $ with ^/bookmarkstotal.html
+if matched then
+	set URL=/index.php?view=bookmarkstotal
+	goto END
+endif
+
+match URL into $ with ^/account.html$
+if matched then
+	set URL=/index.php?view=userpanel
+	goto END
+endif
+
+match URL into $ with ^/account.html&action=(.*)$
+if matched then
+	set URL=/index.php?view=userpanel&action=$1
+	goto END
+endif
+
+match URL into $ with ^/login.html$
+if matched then
+	set URL=/index.php?view=login
+	goto END
+endif
+
+match URL into $ with ^/signup.html$
+if matched then
+	set URL=/index.php?view=signup
+	goto END
+endif
+

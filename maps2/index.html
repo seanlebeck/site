@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="author" content="Roman S. Stepanov" />
+
+	<title>MapSVG: create cozy interative vector maps / floorplans with jQuery / WordPress plugin</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="css/base.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/raphael.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/mapsvg.min.js?v=5.5.4"></script>
+    <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script>
+    <script type="text/javascript">
+        if(window.location.protocol=="file:"){
+            $(document).ready(function(){
+              $('#main-body').prepend('<div class="alert alert-error" style="margin-top: 20px;">SVG map files can\'t be loaded when HTML file is just opened from local folder - because JavaScript don\'t have access to files on your local machine. Please upload demo to server to see maps.</div>');
+            });
+        }
+    </script>
+
+</head>
+
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="index.html">mapSVG</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <a href="index.html">Overview</a>
+              </li>
+              <li>
+                <a href="_documentation.html">Documentation: jQuery</a>
+              </li>
+              <li>
+                <a href="_wp_documentation.html">Documentation: WordPress</a>
+              </li>
+              <li class="">
+                <a href="_faq.html">FAQ</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="jumbotron masthead">
+  <div class="container">
+    <h1>mapSVG</h1>
+    <p>Create cozy interactive maps and floorplans.</p>
+
+    
+    <div class="btn-group" id="buy-btn">
+      <a class="btn btn-large btn-danger dropdown-toggle" data-toggle="dropdown" href="#">Buy on CodeCanyon <span class="caret"></span></a>
+
+      <ul class="dropdown-menu" id="cc-dropdown">
+        <li><a href="http://codecanyon.net/item/jquery-interactive-svg-map-plugin/1694201?ref=Yatek" style="text-align: left; text-shadow: none;">jQuery plugin &rarr;</a></li>
+        <li><a href="http://codecanyon.net/item/mapsvg-interactive-vector-maps/2547255?ref=Yatek" style="text-align: left; text-shadow: none;">WordPress plugin &rarr;</a></li>
+      </ul>
+
+      <script type="text/javascript">
+        var b = $('#buy-btn').width();
+        $('#cc-dropdown').width(b);
+      </script>
+
+    </div>
+    
+
+
+    <ul class="masthead-links">
+      <li>
+        Current jQuery plugin version: 5.5.4
+      </li>
+      <li>
+        WordPress plugin version: 1.4.4
+      </li>
+    </ul>
+
+  </div>
+</div>
+<div class="bs-docs-social">
+  <div class="container">
+
+    <ul class="bs-docs-social-buttons">
+      <li class="follow-btn">
+        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/follow_button.1352365724.html#_=1353139811317&amp;id=twitter-widget-1&amp;lang=en&amp;screen_name=oyatek&amp;show_count=true&amp;show_screen_name=true&amp;size=m" class="twitter-follow-button" style="width: 242px; height: 20px;" title="Twitter Follow Button" data-twttr-rendered="true"></iframe>
+      </li>
+      <li class="tweet-btn">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://map.karaliki.ru" data-text="Create interactive vector maps and floorplans with mapSVG plugin" data-via="oyatek">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </li>
+      <li class="tweet-btn">
+
+          <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmap.karaliki.ru&amp;send=false&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=verdana&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
+      </li>
+
+    </ul>
+  </div>
+</div>
+
+<div class="container" id="main-body">`
+
+    <div class="page-header">
+        <h1>MapSVG: jQuery and WordPress plugin</h1>
+    </div>
+
+    <div class="alert">MapSVG takes map files in SVG format and makes them interactive.</div>
+
+    <p>
+        You can use mapSVG for: <span class="label label-important">country maps</span> <span class="label label-success">city maps</span> <span class="label label-info">subway maps</span> <span class="label label-warning">floorplans</span>
+    </p><br />
+    <div class="row" style="overflow: hidden;">
+
+        <div class="span6">
+            <div id="mapsvg-usa"></div>
+        </div>
+        <div class="span6" id="mapsvg-states-cont">
+            <div id="mapsvg-states" style="min-height:  200px;"></div>
+        </div>
+
+    </div>
+
+        <script type="text/javascript">
+
+            $('#mapsvg-usa').mapSvg({source: '/maps3/maps/usa.svg', width: 1200, responsive: 1,
+            colors: {background: 'transparent', hover: 4, selected: 10, stroke: '#ffffff'},
+            tooltipsMode: 'names',
+
+            regions: {'TX': {selected: true}},
+            onClick: function(){
+
+               var file = 'usa-'+this.name.toLowerCase()+'.svg';
+               
+               console.log($('#mapsvg-states').html());
+               
+               if($('#mapsvg-states').find('svg').length){
+                $('#mapsvg-states').mapSvg().destroy();
+               }
+               
+                              
+
+               $('#mapsvg-states').mapSvg({
+                    source : '/maps3/maps/counties/'+file,
+                    //responsive: 1,
+					             marks:          [
+                                    { c: currentLocation,
+                                      attrs: {'src': '/maps3/markers/pin1_red.png'},
+                                      tooltip: '<strong>You are here!</strong><br />'
+
+                                            +geoip_city()+'<br />'
+                                            +geoip_country_name()+'<br />'
+                                            +'Coordinates: '+currentLocation
+                                    },
+                                    { c: [38.927099,-77.021713],
+                                    attrs: {'src': '/maps3/markers/pin1_yellow.png'},
+                                      tooltip: '<strong>Washington, DC</strong><br />This marker is set by latitude / longitude coordinates:<br />38.893438, -77.03167'
+                                    },
+                                    { c: [51.49763,-0.148315],
+                                      attrs: {'src': '/maps3/markers/pin1_green.png'},
+                                      tooltip: '<strong>London</strong><br />Coordinates: 51.49763, -0.148315'
+                                    }
+                                    ,
+                                    { c: [33.504759,100.283203],
+                                      attrs: {'src': '/maps3/markers/pin1_blue.png'},
+                                      tooltip: '<strong>China</strong> is disabled for demonstration purpose -<br />so it isn\'t clickable or selectable.'
+                                    }
+
+                                 ],
+                    colors: {background: 'transparent', base: "#DDDDDD", stroke: '#ffffff'},
+                    width: $('#mapsvg-usa').width(),
+                    height: $('#mapsvg-usa').height(),
+                    tooltipsMode: 'names',
+                    zoomButtons: {show: true, location: 'right'},
+                    zoom: 1,
+                    pan: 1
+               });
+                
+            }
+            });
+            
+            
+
+
+        </script>
+
+  
+
+</body>
+</html>

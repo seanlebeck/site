@@ -1,0 +1,19 @@
+Hi there,
+
+Thank you for submitting your image ({@IMAGETITLE}) to {@SITENAME}.
+
+Please click the link below to verify your email address. Your image will start to show up only once your email address is verified.
+
+{@VERIFICATIONLINK}
+
+Your image will expire on {@EXPIRESON}.
+
+Once your email is verified, you can see your image here:
+{@IMAGEURL}
+
+If you want to delete your image, go here:
+{@DELETEURL}
+
+
+Thank you,
+Webmaster, {@SITENAME}

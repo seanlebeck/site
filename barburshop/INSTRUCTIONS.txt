@@ -1,0 +1,25 @@
+######################################################
+#
+# Vivaru PHP Classifieds Upgrade from v 2.1 to v 2.2
+#
+# www.vivaru.com
+#
+######################################################
+
+
+INSTRUCTIONS:
+
+
+1. Upload all contents of /Upload/ folder over your existing files.
+
+2. Run the file dbupdate.php in your browser
+
+3. Delete the file dbupdate.php from your server for security reasons
+
+4. Go to Admin Panel and adjust all the settings.
+
+END
+===============================
+
+For more tips and tutorials visit www.vivaru.com 
+

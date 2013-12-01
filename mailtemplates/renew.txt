@@ -1,0 +1,17 @@
+Hi there,
+
+Your following ad that you posted on {@SITENAME} will expire on {@EXPIRESON}
+
+---------------------------------------------------------------------
+ID: {@ADID}
+Title: {@ADTITLE}
+URL: {@ADURL}
+
+{@AD}
+---------------------------------------------------------------------
+
+If you would like to renew the ad, please click the link below and buy one of the Extended Ad packages:
+{@RENEWURL}
+
+Thank you,
+Webmaster, {@SITENAME}
