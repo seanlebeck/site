@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="author" content="Roman S. Stepanov" />
+
+	<title>mapSVG - USA</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="css/base.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/raphael.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/mapsvg.min.js"></script>
+    <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script>
+
+</head>
+
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="index.html">mapSVG</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="index.html">Overview</a>
+              </li>
+              <li>
+                <a href="_documentation.html">Documentation: jQuery</a>
+              </li>
+              <li class="active">
+                <a href="_wp_documentation.html">Documentation: WordPress</a>
+              </li>
+              <li class="">
+                <a href="_faq.html">FAQ</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+    <div class="page-header">
+        <h1>MapSVG documentation for WordPress version</h1>
+    </div>
+
+    <h3>Installation</h3>
+    Unpack .zip to  WordPress plugins folder: "/wp-content/plugins/".
+
+    Activate MapSVG plugin from control panel (Menu &gt; Plugins &gt; Installed Plugins &gt; MapSVG : Activate).<br /><br />
+
+    A new submenu element in "Plugins" section will appear. Open it: (Menu &gt; Plugins &gt; MapSVG).<br />
+    <img src="img/screen4.png" alt="" style="border:1px solid #ddd;"/><br /><br />
+
+    In MapSVG control panel page click "Add new map", choose a map from drop-down list, and set all options. You'll find small hints under option fields which will help you.  Set all options and click "Save".<br /><br />
+
+    A blue message will appear on top of the screen:
+    <div class="alert alert-info">Add this shortcode to a page: [mapsvg id=6]</div>
+
+    <h3>Shortcode using</h3>
+    Insert shortcode to any page of your WordPress site.
+    <img src="img/screen5.png" alt="" style="border:1px solid #ddd;"/><br /><br />
+
+    <p>Please note you can insert additional "selected" option into a shortcode.<br />
+    Use this when you need to insert same map into many pages with just different initially selected country. <br />
+    Examples for World Map:
+    <pre>
+[mapsvg id=6 selected="USA"]
+[mapsvg id=6 selected="Canada"]
+    </pre>
+    </p>
+
+
+
+
+
+    <h3>Adding more maps</h3>
+    Just copy .svg files to "/maps" folder inside of MapSVG plugin's folder. They will automatically appear in plugin's drop-down list.<br /><br />
+
+    <h3>Adding marker images</h3>
+    Put images to "/markers" folder inside of MapSVG plugin's folder. Marker image must point to its bottom side (like a pin) for exact marker position adjustment at different map sizes.<br /><br />
+
+    <h3>Troubles?</h3>
+
+    I'm happy to help but <a href="_faq.html">please read FAQ</a> before mailing me.
+
+<br /><br />
+    <div class="alert">
+        Thanks for purchasing!
+    </div><br /><br /><br />
+
+</body>
+</html>

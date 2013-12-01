@@ -1,0 +1,5 @@
+This mail is sent to you by one of the visitors at {@SITENAME}
+in response to your ad '{@ADTITLE}'
+{@ADURL}.
+The user has provided '{@FROM}' as his/her email address.
+------------------------------------------------------------

@@ -1,0 +1,196 @@
+<script type="text/javascript">
+    FB.init({appId: '<?php echo $fb_app_api; ?>', status: true,
+        cookie: true, xfbml: true});
+</script>
+<?php
+
+ob_start();
+
+define('IN_SCRIPT', true); 
+
+include 'includes/config.php';
+echo $acc_panel_link;
+if ( $acc_construction )
+{
+	general_message($lang['ACC_CONSTRUCTION'], $lang['ACC_CONSTRUCTION_MSG'] . $go_back);
+	exit;
+}
+
+
+
+if( !empty($_COOKIE[$ck_username]) && !empty($_COOKIE[$ck_session]) && !empty($_COOKIE[$ck_userid]) )
+{
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+echo "IMADEIT";
+	header("Location: $acc_panel_link");
+	exit;
+}
+
+
+$user_ip = $_SERVER['REMOTE_ADDR'];
+
+if ( $username_login_only == 1 )
+{
+	$u_row = $lang['ACC_USERNAME'];
+	$u_field = '<input type="text" class="post" name="username" size="25" maxlength="30" value="'.$_POST['username'].'">';		
+}
+else
+{
+	$u_row = $lang['ACC_EMAIL'];
+	$u_field = '<input type="text" class="post" name="update_email" size="25" maxlength="30" value="'.$_POST['update_email'].'">';
+}
+
+
+
+if ( $submit )
+{
+	
+	
+	if ( $username_login_only == 1 )
+	{
+		$u_not_empty = (!empty($username)) ? '1' : '0';
+		$u_success = ($username == $row['username']) ? '1' : '0';
+		$u_sql = "username = '$username'";
+	}
+	else
+	{
+		$u_not_empty = (!empty($update_email)) ? '1' : '0';
+		$u_success = ($update_email == $row['email']) ? '1' : '0';
+		$u_sql = "email = '$update_email'";
+	}
+
+	// BEGIN ERROR CHECKS
+	$pro_pass = md5($password . SALT);
+	$sql = "SELECT user_id, username, email, password, active, user_ip FROM $t_users 
+			WHERE $u_sql AND password = '$pro_pass' LIMIT 1";
+			
+	$result = mysql_query($sql);
+	$row = mysql_fetch_array($result);
+
+
+	if ( empty($username) && $username_login_only == 1 )
+	{ 
+         $error_message .= $lang['ACC_ERROR_USERNAME']; 
+	} 
+	if ( empty($update_email) && !$username_login_only )
+	{ 
+         $error_message .= $lang['ACC_ERROR_EMAIL_VALID']; 
+	} 
+	if ( empty($password) )
+	{ 
+	     $error_message .= $lang['ACC_ERROR_PASS']; 
+	}
+	if ( $row['active'] == 0 && $u_success == 1 && $pro_pass == $row['password'] )
+	{ 
+	     $error_message .= $lang['ACC_ERROR_NOT_ACTIVE']; 
+	}
+	if ( $u_not_empty == 1 && !empty($password) && mysql_num_rows($result) <= 0 )
+	{ 
+	     $error_message .= $lang['ACC_ERROR_LOGIN']; 
+	}
+	
+	if ( $error_message )
+	{
+		general_message($lang['ACC_ERROR'], $error_message);
+	}
+	else
+	{   
+		if ( $submit && $error != TRUE ) 
+		{
+			
+			$md5_password = md5($password . SALT);
+			
+			if ( $savecookies == 1 )
+			{
+				setcookie($ck_username, $row['username'], time() + $cookie_expire_time, $cookie_path, $cookie_domain);
+				setcookie($ck_session, $md5_password, time() + $cookie_expire_time, $cookie_path, $cookie_domain);
+				setcookie($ck_userid, $row['user_id'], time() + $cookie_expire_time, $cookie_path, $cookie_domain);
+			}
+			else
+			{
+				setcookie($ck_username, $row['username'], 0);
+				setcookie($ck_session, $md5_password, 0);
+				setcookie($ck_userid, $row['user_id'], 0);
+			}
+	
+			
+			$update_empty_ip = ($row['user_ip'] <= 0) ? ", user_ip = '$user_ip'" : "";
+			
+			$sql = "UPDATE " . $t_users . " SET last_login = '".time()."' $update_empty_ip WHERE user_id ='".$row['user_id']."'";
+	        mysql_query($sql);
+			header("Location: $acc_panel_link");
+			exit;
+		}
+	}
+
+}
+
+?>
+  
+  <link rel="stylesheet" href="loginstyle.css">
+<table height="600px">
+
+
+
+
+
+<td width="50%" style="padding-top:5px;padding:10px;"  valign="top">
+
+<body style="color: #404040;direction: ltr;font-family: Roboto,arial,sans-serif,Arial,sans-serif;font-size: 13px;">
+  
+
+<a style="a:hover,a:visited { color: rgb(66, 127, 237); cursor: pointer; text-decoration: none; }">
+<div style="margin-top:-40px;position:relative;z-index:915;" class="main content clearfix">
+<div style="	background:#952936;"class="banner"></div>
+<div class="card signin-card clearfix">
+<img class="profile-img" alt="" src="/images/logo.png">
+<p class="profile-name"></p>
+<form action="<?= $_SERVER["REQUEST_URI"] . '&amp;action=login' ?>" method="post"> 
+<?= $u_field ?>
+<input id="password" class="inputpassword" type="password" placeholder="password" name="password">
+<input type="hidden" name="savecookies" value="1">
+<input id="signIn"  value="Submit" name="submit"type="submit" class="rc-button rc-button-submit" style="font-family: Arial,sans-serif; "type="submit" value="Sign in" name="signIn">
+<label class="remember">
+<!--<input id="PersistentCookie" type="checkbox" checked="checkbox" class="stayin" value="yes" name="PersistentCookie">-->
+<span> Stay signed in </span>
+<div style="display:none;" class="bubble-wrap" role="tooltip">
+<div class="bubble-pointer"></div>
+<div class="bubble">For your protection, keep this checked only on devices you use regularly.<a >Learn more</a>
+</div>
+</div>
+</label>
+<a id="link-forgot-passwd" class="need-help-reverse" > Need help? </a>
+</form>
+
+</div>
+  <div>	  
+	  <div class="card signin-card clearfix" style="height:20px;">          
+     <div class="G-q-B" style="    background-color: #FFFFFF;line-height: 1.4em;font: 13px Roboto,arial,sans-serif;color:#404040;"><a style="color:#404040;float:left;" href="<?= $acc_signup_link ?>">Sign up</a>
+	</div>
+	 <div class="G-q-B" style="    background-color: #FFFFFF;line-height: 1.4em;font: 13px Roboto,arial,sans-serif;color:#404040;">
+	<a style="color:#404040;float:right;padding-right:15px;">or log in with<span style="float:right;padding-left:15px;line-height:40px;margin-top:-3px;"><fb:login-button size="medium" perms="email" onlogin="window.location='accounts/fbReg.php';"></fb:login-button>
+
+<div style="display:true !;" id="fb-root"></div>
+
+
+</span>
+</div>
+</a>
+      </div>
+      </div>
+</body>
+<?php
+ob_end_flush();
+?>
+</td>
+</tr>
+</table>

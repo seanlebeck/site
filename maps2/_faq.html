@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="author" content="Roman S. Stepanov" />
+
+	<title>mapSVG - USA</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="css/base.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/raphael.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/mapsvg.min.js"></script>
+    <script type="text/javascript" src="http://j.maxmind.com/app/geoip.js"></script>
+
+</head>
+
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="index.html">mapSVG</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="index.html">Overview</a>
+              </li>
+              <li>
+                <a href="_documentation.html">Documentation: jQuery</a>
+              </li>
+              <li>
+                <a href="_wp_documentation.html">Documentation: WordPress</a>
+              </li>
+              <li class="active">
+                <a href="_faq.html">FAQ</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+    <div class="page-header">
+        <h1>FAQ</h1>
+    </div>
+
+    <h3 id="support">Support</h3>
+
+    <ul>
+        <li><strong>Free support</strong>: all messages with bugs / problems; <br />
+        <li><strong>Paid support</strong>: fine-tuning the plugin for your needs ($30p/hour)
+    </ul>
+
+    <div class="alert alert-error">
+        If you're reporting a bug, <strong>please provide a link to demo</strong> and tell what <strong>browser / OS</strong> you have.
+    </div>
+
+
+
+    <h3>Contents</h3>
+    <ul>
+        <li><strong><a href="#first">First things you must know before asking any questions</a></strong></li>
+        <li><strong><a href="#javascript-errors">Common JavaScript errors</a></strong>
+            <ul>
+                <li><a href="#no-method-mapsvg">Uncaught TypeError: Object [object Object] has no method 'mapSvg'</a></li>
+                <li><a href="#no-on">Object [object Object] has no method 'on'</a></li>
+                <li><a href="#x-undefined">Cannot read property 'x' of undefined</a></li>
+                <li><a href="#domain-origin">XMLHttpRequest cannot load http://domain.com/maps/usa.svg. Origin http://domain.com is not allowed by Access-Control-Allow-Origin.</a></li>
+            </ul>
+        </li>
+        <li><strong><a href="#javascript-errors">Questions</a></strong>
+            <ul>
+                <li><a href="#faq-create-map">I want to create my own map. How do I do that?</a></li>
+                <li><a href="#faq-own-map-fails">I use my own .SVG map and it doesn't work as expected</a></li>
+                <li><a href="#faq-full-width">How to stretch a map to 100% width of screen?</a></li>
+                <li><a href="#faq-gradient">How can I fill a region with gradient?</a></li>
+                <li><a href="#faq-background">How can I set image as background for a region?</a></li>
+                <li><a href="#faq-android">Map doesn't show up on Android</a></li>
+
+
+            </ul>
+
+        </li>
+    </ul>
+
+
+
+
+    <h3 id="first">First things you must know before asking any questions</h3>
+
+    When reporting an error, please remember to provide a link to your test page when possible.<br /><br />
+
+    First in case you get any problem with mapSVG - please open your page in Google Chrome, press <strong>F12</strong> and click last tab named <strong>"Console"</strong>.<br />
+    If there are any errors, you'll see them marked with <span style="color: red;"><strong>red color</strong></span> (please note that there might be some other errors not related to mapSVG):
+    <br /><br />
+    <img src="img/screen1.png"/>
+<br /><br />
+    Next, make sure that you're using <strong>jQuery 1.7.0</strong> or later (1.7.1, 1.7.2 etc.)! <strong>Plugin will not work</strong> with previous jQuery versions. <br />
+    To check which jQuery your site is using, go to "Console" tab in Chrome (see above), click on input field and type in:
+    <strong>console.log(jQuery().jquery)</strong>, press <strong>Enter</strong>.<br /><br />
+    <img src="img/screen21.png"/>
+
+
+    <h3 id="javascript-errors">Common JavaScript errors</h3>
+    <div class="error notop" id="no-method-mapsvg">1. Uncaught TypeError: Object [object Object] has no method 'mapSvg' </div>
+    This means mapSVG plugin wasn't loaded properly. First check that file "mapsvg.js" or "mapsvg.min.js" is insluded in page's body.
+    Next check that jQuery library was included not more that 1 time. <strong>Example:</strong>
+<pre>
+&lt;script type="text/javascript" src="js/jquery-1.7.2.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/raphael.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/mapsvg.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery-1.8.0.js"&gt;&lt;/script&gt;
+
+</pre>
+
+    Example above won't work because: first <strong>jquery-1.7.2</strong> was loaded, then <strong>mapsvg.min.js</strong> was attached to <strong>jquery-1.7.2</strong>, and then <strong>jquery-1.8.0</strong> was loaded so previous mapSvg attachement to jQuery was lost.
+
+
+
+    <div class="error" id="no-on">2. Object [object Object] has no method 'on' </div>
+    You're using old jQuery. Upgrade jQuery to <strong>1.7.x</strong> (it is uncluded in plugin's package).
+
+
+    <div class="error" id="x-undefined">3. Cannot read property 'x' of undefined </div>
+    You haven't created DIV container for your map or you have placed it after $('#mapsvg').mapSvg(). When you try to attach mapSVG plugin to some <strong>div</strong> container which isn't loaded yet - this error occurs. Move <strong>&lt;div id="mapsvg"&gt;&lt;/div&gt;</strong> to a place before <strong>$('#mapsvg').mapSvg()</strong>.
+
+
+
+    <div class="error" id="domain-origin">4. XMLHttpRequest cannot load http://domain.com/maps/usa.svg. Origin http://domain.com is not allowed by Access-Control-Allow-Origin.</div>
+    There is a rule in all browsers that doesn't allow JavaScript to access files on other domains. This means that your script and your map must be on same domain. Please note that even <strong>www.domain.com</strong> and <strong>domain.com</strong> counts as different domains and if I open your page in browser by entering address <strong>domain.com/mapsvg</strong> and you have set map's
+    source by <strong>{source: 'http://www.domain.com'}</strong> - it will fail to load.
+    Same thing with <strong>http://</strong> and <strong>https://</strong>.
+    To avoid problems with <strong>www</strong> - add this rule to <strong>.htaccess</strong> file in site's root folder:
+<pre>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www\.domain.com [NC]
+RewriteRule ^(.*) http://domain.com$1 [R=301,L]
+
+</pre>
+
+This rule will redirect all requests from www.domain.com to domain.com so they become one whole thing.
+
+    <h3>Questions</h3>
+
+
+    <h4 class="notop" id="faq-create-map">1. I want to create my own map. How do I do that?</h4>
+    I recommend using <a href="http://inkscape.org/">InkScape</a> - a Free Open Source vector graphics editor. 
+    It's great for web-oriented SVG maps. 
+    Draw any shapes you need and give them some IDs (right-click, "Object properties").
+    
+    I do not recommend Adobe Illustrator as it's less compatible with web. If you use it, open ready SVG file in any text editor and remove DOCTYPE tag (this tag stops map from loading in IE7-8).
+
+
+    <h4 id="faq-own-map-fails">2. I use my own .SVG map and it doesn't work as expected</h4>
+    <div class="answer">
+    Some time ago here was a tutorial on modifying SVG file - to make it compatible with mapSVG. It was required because only one SVG object was supported - &ltpath /&gt;.<br /> 
+    
+    But starting from version 5.5.2 (jQuery plugin) and 1.4.1 (WordPress plugin) mapSVG supports all of main SVG objects - 
+    path, group, polygon, polyline, circle, ellipse, rectangle, text/tspan.<br />
+    
+    So that tutorial was removed. But if your map still shows with errors - mail me from my <a href="http://codecanyon.net/user/Yatek?ref=Yatek">profile page</a> on CodeCanyon (message form is on bottom right corner).
+    </div>
+
+
+    <h4 id="faq-full-width">3. How to stretch a map to 100% width of screen?</h4>
+    Set map's container width to 100% <strong>&lt;div style="width: 100%"&gt;&lt;/div&gt;</strong>
+    and set <strong>{responsive: true}</strong> in mapSVG options.
+
+    <h4 id="faq-gradient">4. How can I fill a region with gradient?</h4>
+    <strong>Linear gradient format: "</strong>&lt;angle&gt;-&lt;colour&gt;[-&lt;colour&gt;[:&lt;offset&gt;]]*-&lt;colour&gt;", <br />
+    <strong>Example:</strong> "90-#fff-#000" - 90&#186; gradient from white to black or "0-#fff-#f00:20-#000" - 0&#186; gradient from white via red (at 20%) to black.
+
+    <h4 id="faq-background">5. How can I set image as background for a region?</h4>
+    Instead of hex color <strong>#FF1122</strong> just set path to image <strong>url(/path/to/image.jpg)</strong>.
+
+    <h4 id="faq-android">6. Map doesn't show up on Android</h4>
+    The default Android browser did not support SVG until Android 3.0 (Honeycomb) added SVG support in the default browser.
+    Other workaround is to use Opera Mobile (free from the Android Market) which will work whatever the Android version.
+
+
+
+<h3>That's all!</h3>
+Hope this helps. If not, mail me from my <a href="http://codecanyon.net/user/Yatek?ref=Yatek">profile page</a> on CodeCanyon (message form is on bottom right corner).
+<br /><br />
+
+<em>best wishes,<br />
+Roman</em>
+<br /><br /><br />
+
+<a href="#" class="btn btn-danger">Scroll to Top <i class="icon-arrow-up icon-white"></i></a>
+
+<br /><br /><br /><br />
+
+
+</div>
+</body>
+</html>
