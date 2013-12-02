@@ -1,1 +1,0 @@
-<?php include("indexmaps2.html"); ?>
